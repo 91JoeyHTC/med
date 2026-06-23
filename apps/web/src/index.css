@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  background: #ffffff;
+  color: #1a1a1a;
+  font-family: 'Inter', 'PingFang TC', 'Noto Sans TC', -apple-system, system-ui, sans-serif;
+  line-height: 1.65;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 盤面節點 hover：B&O 取向，輕微壓暗（非高亮） */
+.seg { transition: filter 0.15s cubic-bezier(0.4, 0, 0.2, 1); }
+.seg:hover { filter: brightness(0.93); }
+
+.topic-chip:hover { text-decoration: underline; text-underline-offset: 3px; }
+.act-btn:hover { filter: brightness(0.9); }
+.act-btn:active { transform: scale(0.98); }
+input:focus, select:focus { outline: none; border-color: #1a1a1a; }
+
+/* 知識卡內文 */
+.kb p { margin: 6px 0; font-size: 13.5px; }
+.kb b { color: #1a1a1a; }
+.kb .muted { color: #6b6b6b; }
+.kb .small { font-size: 12px; }
+.kb .hint {
+  font-size: 12px; color: #6b6b6b; background: #faf8f4;
+  border: 1px solid #e8e4dd; border-radius: 2px;
+  padding: 8px 10px; margin-top: 8px; display: block;
+}
+
+/* 分析區 */
+.an .lgd { font-size: 12.5px; margin: 3px 0; }
+.an .lgd b { color: #1a1a1a; }
+.an .muted { color: #6b6b6b; }
+.an hr { border: none; border-top: 1px solid #e8e4dd; margin: 9px 0; }
+.an table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 12.5px; }
+.an th, .an td { border: 1px solid #e8e4dd; padding: 5px 7px; text-align: center; }
+.an th { background: #f4f1ec; color: #1a1a1a; }

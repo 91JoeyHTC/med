@@ -1,0 +1,26 @@
+{
+  "name": "medicine-wheel",
+  "version": "1.0.0",
+  "private": true,
+  "description": "藥輪 App（Medicine Wheel）monorepo：知識盤 / 個人盤 / 合盤。",
+  "workspaces": [
+    "packages/*",
+    "apps/web",
+    "apps/api"
+  ],
+  "scripts": {
+    "sync:spec": "node apps/web/scripts/sync-spec.mjs",
+    "gen:seed": "node scripts/gen-seed.mjs > supabase/seed.sql",
+    "check:spec": "npm run sync:spec && node scripts/check-spec-consistency.mjs",
+    "dev:web": "npm --workspace @medicine-wheel/web run dev",
+    "build:web": "npm --workspace @medicine-wheel/web run build",
+    "test:web": "npm --workspace @medicine-wheel/web run test",
+    "dev:api": "npm --workspace @medicine-wheel/api run start:dev",
+    "build:api": "npm --workspace @medicine-wheel/api run build",
+    "test:engine": "cd services/engine && python3 -m pytest -q",
+    "engine:dev": "cd services/engine && uvicorn app.main:app --reload --port 8000"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

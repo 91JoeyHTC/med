@@ -1,0 +1,27 @@
+node_modules/
+dist/
+build/
+vite.config.ts.timestamp-*.mjs
+package-lock.json
+.next/
+coverage/
+*.log
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+
+# 前端 spec 拷貝由 sync-spec 產生（可重生；不入庫以避免雙真理）
+apps/web/src/data/spec.json

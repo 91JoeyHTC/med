@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm i *)",
+      "Bash(break)",
+      "Bash(node -e \"require\\('@rollup/rollup-darwin-arm64'\\); console.log\\('OK loaded'\\)\")",
+      "Bash(rm -rf node_modules/@rollup/rollup-darwin-arm64 && npm i --no-save @rollup/rollup-darwin-arm64@4.62.2 2>&1 | tail -4 && echo \"--- verify ---\" && node -e \"require\\('@rollup/rollup-darwin-arm64'\\); console.log\\('OK loaded'\\)\" 2>&1 | tail -2)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:5173/)",
+      "Bash(curl -s http://localhost:5173/)",
+      "Bash(git --version)",
+      "Bash(git init *)"
+    ],
+    "additionalDirectories": [
+      "/Users/joeyshiue/repos/med/apps/web/node_modules/@rollup/rollup-darwin-arm64"
+    ]
+  }
+}
