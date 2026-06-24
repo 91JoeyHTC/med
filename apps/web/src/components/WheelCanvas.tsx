@@ -34,12 +34,13 @@ function MarkerLayer() {
     if (id === 1) { dx = 0; dy = -1; }
     const slot = tagSlots[id] || 0;
     tagSlots[id] = slot + 1;
-    const px = x + dx * (R + 13);
-    const py = y + dy * (R + 13) + slot * 13;
+    const px = x + dx * (R + 16);
+    const py = y + dy * (R + 16) + slot * 15;
     const anchor = dx > 0.34 ? 'start' : dx < -0.34 ? 'end' : 'middle';
     children.push(
-      <text key={'k' + key++} x={px} y={py} textAnchor={anchor} fontSize={10} fill={color}
-        fontWeight={700} stroke="#FFFFFF" strokeWidth={0.7}>{text}</text>
+      <text key={'k' + key++} x={px} y={py} textAnchor={anchor} fontSize={11} fill={color}
+        fontWeight={700} stroke="#FFFFFF" strokeWidth={2.8} paintOrder="stroke"
+        strokeLinejoin="round" style={{ pointerEvents: 'none' }}>{text}</text>
     );
   };
 
