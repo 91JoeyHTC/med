@@ -1,0 +1,11 @@
+{
+  // Cloudflare Workers — 靜態資產（Static Assets）部署 藥輪 web 前端。
+  // 部署時 wrangler 必須在 apps/web 目錄下執行（見 CF 專案設定 Root directory = apps/web）。
+  "name": "med",
+  "compatibility_date": "2025-05-01",
+  "assets": {
+    "directory": "./dist",
+    // React SPA：找不到的路徑回退到 index.html，避免子路徑/重新整理 404。
+    "not_found_handling": "single-page-application"
+  }
+}
