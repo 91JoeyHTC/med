@@ -23,7 +23,7 @@ function TagRow({ tags }: { tags: string[] }) {
 }
 
 function KnowledgeCard() {
-  const { activeKB, activeGeneral } = useWheelStore();
+  const { activeKB, activeGeneral, content } = useWheelStore();
 
   if (activeGeneral) {
     return (
@@ -47,7 +47,11 @@ function KnowledgeCard() {
     );
   }
 
-  const item = spec.knowledge[String(k)];
+  // 內容真理來源：Supabase position_content（store.content）；讀不到則 fallback 回 bundled spec.knowledge。
+  const row = content?.[String(k)];
+  const item = row
+    ? { title: row.title, tags: row.tags || [], html: row.summary_html || '' }
+    : spec.knowledge[String(k)];
   if (!item) {
     return <p style={{ color: '#6B6B6B', fontSize: 13 }}>此位置尚無知識卡內容（待教材核對）。</p>;
   }
@@ -56,6 +60,14 @@ function KnowledgeCard() {
       <h2 style={titleStyle}>{item.title}</h2>
       <TagRow tags={item.tags || []} />
       <div className="kb" dangerouslySetInnerHTML={{ __html: item.html }} />
+      {row?.detail_html && (
+        <details style={{ marginTop: 16 }}>
+          <summary style={{ cursor: 'pointer', fontSize: 13, color: '#6B6B6B', letterSpacing: '.04em' }}>
+            詳細（逐字稿）
+          </summary>
+          <div className="kb" style={{ marginTop: 12 }} dangerouslySetInnerHTML={{ __html: row.detail_html }} />
+        </details>
+      )}
     </div>
   );
 }

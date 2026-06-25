@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { spec } from './lib/wheel/spec';
 import { calcNatal } from './lib/wheel/calc';
+import { fetchContent, type ContentRow } from './lib/content';
 import type { Mode, Person, Who } from './lib/wheel/types';
 
 function newPerson(): Person {
@@ -21,7 +22,9 @@ interface WheelState {
   who: Who;
   overlay: boolean;
   people: { A: Person; B: Person };
+  content: Record<string, ContentRow> | null;
 
+  loadContent: () => Promise<void>;
   setMode: (mode: Mode) => void;
   showKB: (id: number) => void;
   showGeneral: (name: string) => void;
@@ -41,7 +44,12 @@ export const useWheelStore = create<WheelState>()(
       who: 'A',
       overlay: false,
       people: { A: newPerson(), B: newPerson() },
+      content: null,
 
+      loadContent: async () => {
+        const c = await fetchContent();
+        if (c) set({ content: c });
+      },
       setMode: (mode) => set({ mode }),
       showKB: (id) => set({ activeKB: id, activeGeneral: null }),
       showGeneral: (name) => set({ activeGeneral: name }),

@@ -11,6 +11,7 @@
   "scripts": {
     "sync:spec": "node apps/web/scripts/sync-spec.mjs",
     "gen:seed": "node scripts/gen-seed.mjs > supabase/seed.sql",
+    "gen:content": "node scripts/gen-content-seed.mjs > supabase/seed_content.sql",
     "check:spec": "npm run sync:spec && node scripts/check-spec-consistency.mjs",
     "dev:web": "npm --workspace @medicine-wheel/web run dev",
     "build:web": "npm --workspace @medicine-wheel/web run build",

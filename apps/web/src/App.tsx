@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useWheelStore } from './store';
 import WheelCanvas from './components/WheelCanvas';
 import KnowledgePanel from './components/KnowledgePanel';
@@ -26,7 +27,11 @@ function Tab({ active, label, onClick }: { active: boolean; label: string; onCli
 }
 
 export default function App() {
-  const { mode, setMode } = useWheelStore();
+  const { mode, setMode, loadContent } = useWheelStore();
+
+  useEffect(() => {
+    loadContent();
+  }, [loadContent]);
 
   return (
     <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 28px 64px' }}>
