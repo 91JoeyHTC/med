@@ -47,25 +47,23 @@ export default function App() {
         <Tab active={mode === 'draw'} label="繪製藥輪盤" onClick={() => setMode('draw')} />
       </div>
 
-      <div style={{ display: 'flex', gap: 34, alignItems: 'flex-start' }}>
-        <div style={{ flex: '0 0 560px', position: 'sticky', top: 10 }}>
-          <WheelCanvas />
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, fontSize: 12, color: '#6B6B6B', justifyContent: 'center', marginTop: 10 }}>
-            {LEGEND.map((l) => (
-              <span key={l.label}>
-                <i style={{ display: 'inline-block', width: 11, height: 11, borderRadius: 2, marginRight: 5, verticalAlign: -1, background: l.color }} />
-                {l.label}
-              </span>
-            ))}
-          </div>
+      <div style={{ maxWidth: 720, margin: '0 auto 40px' }}>
+        <WheelCanvas />
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, fontSize: 12, color: '#6B6B6B', justifyContent: 'center', marginTop: 14 }}>
+          {LEGEND.map((l) => (
+            <span key={l.label}>
+              <i style={{ display: 'inline-block', width: 11, height: 11, borderRadius: 2, marginRight: 5, verticalAlign: -1, background: l.color }} />
+              {l.label}
+            </span>
+          ))}
         </div>
+      </div>
 
-        <div style={{ flex: 1, minWidth: 0 }}>
-          {mode === 'know' ? <KnowledgePanel /> : <DrawPanel />}
-          <p style={{ margin: '16px 4px 0', color: '#9A9A9A', fontSize: 11, lineHeight: 1.8 }}>
-            本工具以「能量互動模式」呈現，採陪伴而非預言之原則；非醫療、心理諮商或法律建議。內容以春花媽詮釋與 Sun Bear 傳統為本，逐字稿未深入處標註「未深入／待教材核對」。
-          </p>
-        </div>
+      <div style={{ maxWidth: 820, margin: '0 auto', minWidth: 0 }}>
+        {mode === 'know' ? <KnowledgePanel /> : <DrawPanel />}
+        <p style={{ margin: '16px 4px 0', color: '#9A9A9A', fontSize: 11, lineHeight: 1.8 }}>
+          本工具以「能量互動模式」呈現，採陪伴而非預言之原則；非醫療、心理諮商或法律建議。內容以春花媽詮釋與 Sun Bear 傳統為本，逐字稿未深入處標註「未深入／待教材核對」。
+        </p>
       </div>
     </div>
   );
