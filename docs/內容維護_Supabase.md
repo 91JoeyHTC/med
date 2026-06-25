@@ -15,23 +15,23 @@
 
 ## 首次設定（一次性）
 
-1. 套用 migration（建立 `position_content` 表 + 公開讀取 RLS）：
+需要一個 Supabase 專案（https://supabase.com → New project）。
+
+1. **套用 migrations + 灌 seeds（一個指令）**。連線字串在 Supabase → Project Settings → Database → Connection string → URI（記得填入你的資料庫密碼）：
    ```bash
-   supabase db push
+   npm install   # 取得 pg
+   DATABASE_URL="postgresql://postgres:<密碼>@db.<ref>.supabase.co:5432/postgres" npm run db:setup
    ```
-2. 灌入初始資料（先結構、再內容）：
-   ```bash
-   psql "$DATABASE_URL" -f supabase/seed.sql                 # positions（結構）
-   psql "$DATABASE_URL" -f supabase/seed_content.sql         # position_content（內容初始 bootstrap）
-   psql "$DATABASE_URL" -f supabase/seed_content_detail.sql  # 逐字稿詳細內容 detail_html（覆蓋既有）
-   ```
-   `seed_content.sql` 用 `on conflict do nothing`，重跑不會覆蓋你在 Studio 的編輯；
-   `seed_content_detail.sql` 為 `update`，會把逐字稿涵蓋位置（造物者/大地母親/太陽/月亮/海龜/烈日/彩梅/收穫/渡鴉/蛇/馬駝鹿）的 `detail_html` 一次補上。
-3. 設定前端環境變數（本地 `apps/web/.env`、以及 Cloudflare 專案 Variables）：
-   ```
-   VITE_SUPABASE_URL=https://<project>.supabase.co
-   VITE_SUPABASE_ANON_KEY=<anon key>
-   ```
+   `db:setup` 依序套用 `0001/0002` migration 與三份 seed，並略過「already exists」（可安全重跑）。
+   - `seed_content.sql` 用 `on conflict do nothing`，不覆蓋你在 Studio 的編輯；
+   - `seed_content_detail.sql` 為 `update`，把逐字稿涵蓋位置（造物者/大地母親/太陽/月亮/海龜/烈日/採莓/收穫/渡鴉/蛇/馬駝鹿）的 `detail_html` 一次補上。
+2. 設定前端環境變數（兩處）。URL 與 anon key 在 Supabase → Project Settings → API：
+   - 本地 `apps/web/.env`：
+     ```
+     VITE_SUPABASE_URL=https://<ref>.supabase.co
+     VITE_SUPABASE_ANON_KEY=<anon public key>
+     ```
+   - Cloudflare：Worker `med` → Settings → Variables，加同樣兩個變數，再重新部署。
 
 ## 日常維護
 
