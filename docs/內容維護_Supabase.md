@@ -21,10 +21,12 @@
    ```
 2. 灌入初始資料（先結構、再內容）：
    ```bash
-   psql "$DATABASE_URL" -f supabase/seed.sql          # positions（結構）
-   psql "$DATABASE_URL" -f supabase/seed_content.sql  # position_content（內容初始 bootstrap）
+   psql "$DATABASE_URL" -f supabase/seed.sql                 # positions（結構）
+   psql "$DATABASE_URL" -f supabase/seed_content.sql         # position_content（內容初始 bootstrap）
+   psql "$DATABASE_URL" -f supabase/seed_content_detail.sql  # 逐字稿詳細內容 detail_html（覆蓋既有）
    ```
-   `seed_content.sql` 用 `on conflict do nothing`，重跑不會覆蓋你在 Studio 的編輯。
+   `seed_content.sql` 用 `on conflict do nothing`，重跑不會覆蓋你在 Studio 的編輯；
+   `seed_content_detail.sql` 為 `update`，會把逐字稿涵蓋位置（造物者/大地母親/太陽/月亮/海龜/烈日/彩梅/收穫/渡鴉/蛇/馬駝鹿）的 `detail_html` 一次補上。
 3. 設定前端環境變數（本地 `apps/web/.env`、以及 Cloudflare 專案 Variables）：
    ```
    VITE_SUPABASE_URL=https://<project>.supabase.co
